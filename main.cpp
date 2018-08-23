@@ -25,7 +25,7 @@ void main() {
 	cout << endl;
 
 	cout << "队尾元素的值增大为18后：" << endl;
-	HeapIncreaseKey(array, len, len - 1, 18);
+	HeapIncreaseKey_NoSwap(array, len, len - 1, 18);
 	for (int i = 0; i < len; ++i) {
 		cout << array[i] << "\t";
 	}
@@ -55,7 +55,7 @@ void main() {
 	cout << endl;
 
 	cout << "队尾元素的值减小为0后：" << endl;
-	HeapDecreaseKey(array, len, len - 1, 0);
+	HeapDecreaseKey_NoSwap(array, len, len - 1, 0);
 	for (int i = 0; i < len; ++i) {
 		cout << array[i] << "\t";
 	}

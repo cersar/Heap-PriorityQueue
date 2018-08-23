@@ -3,6 +3,7 @@
 #include "Heap.h"
 #include<iostream>
 #include<limits.h>
+#include<math.h>
 using namespace std;
 
 void MaxHeapInsert(int Q[], int &len, int item)
@@ -42,7 +43,7 @@ void HeapIncreaseKey(int Q[], int len, int i, int key)
 		cout << "Q[i] > key" << endl;
 	}
 	else {
-		int parentIndex = (i - 1) / 2;
+		int parentIndex = floor(double((i - 1)) / 2);
 		Q[i] = key;
 		while (parentIndex >= 0 && Q[i] > Q[parentIndex]) {
 			swap(Q[i], Q[parentIndex]);
@@ -51,6 +52,8 @@ void HeapIncreaseKey(int Q[], int len, int i, int key)
 		}
 	}
 }
+
+
 
 void MinHeapInsert(int Q[], int &len, int item)
 {
@@ -78,12 +81,46 @@ void HeapDecreaseKey(int Q[], int len, int i, int key)
 		cout << Q[i] <<" < "<<key << endl;
 	}
 	else {
-		int parentIndex = (i - 1) / 2;
+		int parentIndex = floor(double((i - 1)) / 2);
 		Q[i] = key;
 		while (parentIndex >= 0 && Q[i] < Q[parentIndex]) {
 			swap(Q[i], Q[parentIndex]);
 			i = parentIndex;
-			parentIndex = (i - 1) / 2;
+			parentIndex = floor(double((i - 1)) / 2);
 		}
+	}
+}
+
+void HeapIncreaseKey_NoSwap(int Q[], int len, int i, int key)
+{
+	if (Q[i] > key) {
+		cout << "Q[i] > key" << endl;
+	}
+	else {
+		int parentIndex = floor(double((i - 1)) / 2);
+		Q[i] = key;
+		while (parentIndex >= 0 && Q[parentIndex] < key) {
+			Q[i] = Q[parentIndex];
+			i = parentIndex;
+			parentIndex = floor(double((i - 1)) / 2);
+		}
+		Q[i] = key;
+	}
+}
+
+void HeapDecreaseKey_NoSwap(int Q[], int len, int i, int key)
+{
+	if (Q[i] < key) {
+		cout << Q[i] << " < " << key << endl;
+	}
+	else {
+		int parentIndex = floor(double((i - 1)) / 2);
+		Q[i] = key;
+		while (parentIndex >= 0 && Q[parentIndex] > key) {
+			Q[i] = Q[parentIndex];
+			i = parentIndex;
+			parentIndex = floor(double((i - 1)) / 2);
+		}
+		Q[i] = key;
 	}
 }

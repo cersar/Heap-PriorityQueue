@@ -6,3 +6,5 @@ void HeapIncreaseKey(int Q[], int len, int i, int key);
 void MinHeapInsert(int Q[], int &len, int item);
 int HeapExtractMin(int Q[], int &len);
 void HeapDecreaseKey(int Q[], int len, int i, int key);
+void HeapIncreaseKey_NoSwap(int Q[], int len, int i, int key);
+void HeapDecreaseKey_NoSwap(int Q[], int len, int i, int key);
