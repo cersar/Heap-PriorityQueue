@@ -2,15 +2,17 @@
 #include "ToolFuncs.h"
 #include "Heap.h"
 #include<iostream>
+#include<limits.h>
 using namespace std;
 
-void Insert(int Q[], int &len, int item)
+void MaxHeapInsert(int Q[], int &len, int item)
 {
 	len++;
-	IncreaseKey(Q, len, len - 1, item);
+	Q[len - 1] = INT_MIN;
+	HeapIncreaseKey(Q, len, len - 1, item);
 }
 
-int Maxium(int Q[], int len)
+int HeapTopItem(int Q[], int len)
 {
 	if (len > 0) {
 		return Q[0];
@@ -21,7 +23,7 @@ int Maxium(int Q[], int len)
 	}
 }
 
-int ExtractMax(int Q[], int &len)
+int HeapExtractMax(int Q[], int &len)
 {
 	if (len < 1) {
 		cout << "len < 1 !!!" << endl;
@@ -34,7 +36,7 @@ int ExtractMax(int Q[], int &len)
 	return max;
 }
 
-void IncreaseKey(int Q[], int len, int i, int key)
+void HeapIncreaseKey(int Q[], int len, int i, int key)
 {
 	if (Q[i] > key) {
 		cout << "Q[i] > key" << endl;
@@ -43,6 +45,42 @@ void IncreaseKey(int Q[], int len, int i, int key)
 		int parentIndex = (i - 1) / 2;
 		Q[i] = key;
 		while (parentIndex >= 0 && Q[i] > Q[parentIndex]) {
+			swap(Q[i], Q[parentIndex]);
+			i = parentIndex;
+			parentIndex = (i - 1) / 2;
+		}
+	}
+}
+
+void MinHeapInsert(int Q[], int &len, int item)
+{
+	len++;
+	Q[len - 1] = INT_MAX;
+	HeapDecreaseKey(Q, len, len - 1, item);
+}
+
+int HeapExtractMin(int Q[], int &len)
+{
+	if (len < 1) {
+		cout << "len < 1 !!!" << endl;
+		exit(-1);
+	}
+	int min = Q[0];
+	swap(Q[0], Q[len - 1]);
+	len--;
+	MinHeap(Q, len, 0);
+	return min;
+}
+
+void HeapDecreaseKey(int Q[], int len, int i, int key)
+{
+	if (Q[i] < key) {
+		cout << Q[i] <<" < "<<key << endl;
+	}
+	else {
+		int parentIndex = (i - 1) / 2;
+		Q[i] = key;
+		while (parentIndex >= 0 && Q[i] < Q[parentIndex]) {
 			swap(Q[i], Q[parentIndex]);
 			i = parentIndex;
 			parentIndex = (i - 1) / 2;

@@ -26,3 +26,27 @@ void MaxHeap(int array[], int heapSize, int index) {
 	}
 	
 }
+
+void MakeMinHeap(int array[], int heapSize)
+{
+	for (int i = heapSize / 2 - 1; i >= 0; --i) {
+		MinHeap(array, heapSize, i);
+	}
+}
+
+void MinHeap(int array[], int heapSize, int index)
+{
+	int left = 2 * index + 1;
+	int right = 2 * index + 2;
+	int minIndex = index;
+	if (left < heapSize&&array[minIndex] > array[left]) {
+		minIndex = left;
+	}
+	if (right < heapSize&&array[minIndex] > array[right]) {
+		minIndex = right;
+	}
+	if (minIndex != index) {
+		swap(array[minIndex], array[index]);
+		MinHeap(array, heapSize, minIndex);
+	}
+}
